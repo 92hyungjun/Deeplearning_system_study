@@ -26,10 +26,10 @@ def add(x: torch.Tensor, y: torch.Tensor):
         g_size = (triton.cdiv(n_elements, meta['BLOCK_SIZE']), )
         return g_size
     add_kernel[grid](x, y, output, n_elements, 
-                    BLOCK_SIZE=32, num_warps=1, num_stages=1)
+                    BLOCK_SIZE=256, num_warps=1, num_stages=1)
     return output
 
-input_shapes = (128,1)
+input_shapes = (1024,1)
 test_dtype = torch.uint8
 x = torch.randint(0,2, input_shapes, device='cuda', dtype=test_dtype)
 y = torch.randint(0,2, input_shapes, device='cuda', dtype=test_dtype)
