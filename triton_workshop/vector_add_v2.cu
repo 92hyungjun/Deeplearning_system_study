@@ -6,7 +6,8 @@
 #define ELEMENTS_PER_BLOCK 256
 
 // CUDA kernel for vector addition
-__global__ void vectorAdd(const float* A, const float* B, float* C, int numElements) {
+__global__ void vectorAdd(const float* A, const float* B, 
+                                float* C, int numElements) {
     int idx = blockIdx.x * ELEMENTS_PER_BLOCK + threadIdx.x;
 
     for (int i = 0; i < ELEMENTS_PER_BLOCK / THREADS_PER_BLOCK; ++i) {
