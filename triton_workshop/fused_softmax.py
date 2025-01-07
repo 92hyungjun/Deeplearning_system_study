@@ -48,7 +48,6 @@ def softmax_kernel(output_ptr, input_ptr, n_eles, BLOCK_SIZE: tl.constexpr):
 
 def softmax(x):
     n_rows, n_cols = x.shape
-    BLOCK_SIZE = triton.next_power_of_2(n_cols)
     y = torch.empty_like(x)
     num_programs = n_rows
     n_elements = y.numel()
